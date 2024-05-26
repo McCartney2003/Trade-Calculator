@@ -20,16 +20,16 @@ const connectToDB = async()=>{
 app.use(express.json());
 app.use(cors());
 
-// app.use((req, res, next) => {
-//     if (
-//         req.originalMethod !== "GET" &&
-//         req.headers["security-key"] !== process.env.SECURITY_KEY
-//     ) {
-//         res.json({ message: "You are not authorized" });
-//         return;
-//     }
-//     next();
-// });
+app.use((req, res, next) => {
+    if (
+        req.originalMethod !== "GET" &&
+        req.headers["security-key"] !== process.env.SECURITY_KEY
+    ) {
+        res.json({ message: "You are not authorized" });
+        return;
+    }
+    next();
+});
 
 app.use(BASE_URL, storageRouter);
 app.use(BASE_URL, transactionRouter);
