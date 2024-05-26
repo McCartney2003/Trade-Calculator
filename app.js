@@ -4,8 +4,9 @@ const express = require("express");
 const app = express();
 const mongoose = require("mongoose");
 const cors = require("cors");
-const { storageRouter } = require("./routes/dataStorgaeRoute");
+const { storageRouter } = require("./routes/dataStorgaeRoutes");
 const { connectMongoDb } = require("./db");
+const { transactionRouter } = require("./routes/transactionRoutes");
 
 
 const PORT = process.env.PORT || 5000;
@@ -31,6 +32,7 @@ app.use(cors());
 // });
 
 app.use(BASE_URL, storageRouter);
+app.use(BASE_URL, transactionRouter);
 
 
 app.listen(PORT, async (err) => {
